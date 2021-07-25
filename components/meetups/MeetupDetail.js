@@ -1,4 +1,5 @@
-import Head from "next/head";
+import Head from 'next/head';
+import Image from 'next/image';
 import classes from './MeetupDetail.module.css';
 
 const MeetupDetail = (props) => {
@@ -14,9 +15,11 @@ const MeetupDetail = (props) => {
       <section
         className={classes.detail}
       >
-        <img
+        <Image
           src={props.image}
           alt={props.title}
+          width={640}
+          height={640*3/4}
         />
         <h1>{props.title}</h1>
         <address>{props.address}</address>
