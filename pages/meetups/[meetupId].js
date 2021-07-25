@@ -17,10 +17,9 @@ export const getStaticPaths = async () => {
 
   const meetupsCollection = db.collection('meetups');
 
-  const meetupIds = await meetupsCollection.find({}, { _id: 1 }).toArray();
+  const meetupIds = await meetupsCollection.find({}, { projection: { _id: 1 } }).toArray();
 
   client.close();
-
   return {
     fallback: 'blocking', // if true we can have dynamic fallback
     paths: meetupIds.map(meetup => ({
@@ -40,7 +39,6 @@ export const getStaticProps = async (context) => {
   const selectedMeetup = await meetupsCollection.findOne({ _id: ObjectId(context.params.meetupId) });
 
   client.close();
-
   return {
     props: {
       meetupData: {
